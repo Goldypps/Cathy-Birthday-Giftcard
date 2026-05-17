@@ -54,14 +54,14 @@
   </style>
 </head>
 
-<!-- Background diubah menjadi tema angkasa luar malam hari (Dark Cosmic Gradient) -->
-<body class="min-h-screen bg-gradient-to-tr from-gray-950 via-slate-900 to-indigo-950 flex items-center justify-center p-6 relative overflow-hidden">
+<!-- overflow-hidden di body sudah dihapus agar bisa scroll -->
+<body class="min-h-screen bg-gradient-to-tr from-gray-950 via-slate-900 to-indigo-950 flex items-center justify-center p-6 relative">
 
-  <!-- Container untuk efek luar angkasa -->
-  <div id="space-field" class="absolute inset-0 pointer-events-none z-0"></div>
+  <!-- Diubah jadi FIXED dan OVERFLOW-HIDDEN agar meteor tidak merusak scroll halaman -->
+  <div id="space-field" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
-  <!-- Konten Utama (z-10 agar tetap kontras di atas background gelap) -->
-  <div class="bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100 relative z-10">
+  <!-- Konten Utama (z-10) -->
+  <div class="bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100 relative z-10 my-auto">
 
     <div class="text-6xl mb-4 animate-bounce">🎂</div>
 
@@ -111,23 +111,20 @@
 
     const spaceField = document.getElementById('space-field');
 
-    // Generate 300 Bintang secara acak di seluruh layar
+    // Generate 300 Bintang
     const starCount = 300; 
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
       
-      // Ukuran acak bintang (1px sampai 3.5px) agar ada efek jauh-dekat
       const size = Math.random() * 2.5 + 1;
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
       
-      // Posisi acak mutlak di seluruh background
       star.style.top = `${Math.random() * 100}%`;
       star.style.left = `${Math.random() * 100}%`;
       
-      // Ritme kedap-kedip yang acak total
-      const duration = Math.random() * 3 + 1.5; // Kedip antara 1.5 - 4.5 detik
+      const duration = Math.random() * 3 + 1.5; 
       const delay = Math.random() * 5;
       star.style.setProperty('--duration', `${duration}s`);
       star.style.setProperty('--delay', `${delay}s`);
@@ -135,19 +132,17 @@
       spaceField.appendChild(star);
     }
 
-    // Generate 7 Meteor jatuh secara bergantian terus-menerus
+    // Generate 7 Meteor
     const meteorCount = 7;
     for (let i = 0; i < meteorCount; i++) {
       const meteor = document.createElement('div');
       meteor.classList.add('meteor');
       
-      // Posisi awal acak di area atas dan kanan layar
       meteor.style.top = `${Math.random() * -10 + Math.random() * 30}%`;
       meteor.style.left = `${Math.random() * 50 + 50}%`; 
       
-      // Kecepatan dan jeda jatuh acak
-      const duration = Math.random() * 4 + 5; // Durasi animasi
-      const delay = Math.random() * 7; // Jeda kemunculan awal
+      const duration = Math.random() * 4 + 5; 
+      const delay = Math.random() * 7; 
       meteor.style.setProperty('--duration', `${duration}s`);
       meteor.style.animationDelay = `${delay}s`;
       
