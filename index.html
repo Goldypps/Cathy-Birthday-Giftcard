@@ -6,11 +6,57 @@
   <title>Happy Birthday</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* Style untuk Efek Bintang Bling-Bling */
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+      animation: twinkle var(--duration) infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.3); }
+    }
+
+    /* Style untuk Efek Meteor Jatuh */
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 120px;
+      background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+      opacity: 0;
+      animation: meteor-fall var(--duration) infinite linear;
+    }
+    @keyframes meteor-fall {
+      0% {
+        transform: translate(0, 0) rotate(35deg);
+        opacity: 0;
+      }
+      1% {
+        opacity: 1;
+      }
+      8% {
+        transform: translate(-300px, 450px) rotate(35deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-300px, 450px) rotate(35deg);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center p-6">
+<body class="min-h-screen bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center p-6 relative overflow-x-hidden">
 
-  <div class="bg-white shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100">
+  <!-- Container untuk efek background luar angkasa -->
+  <div id="starfield" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+  <!-- Konten Utama (ditambahkan z-10 agar tetap di atas background) -->
+  <div class="bg-white shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100 relative z-10">
 
     <div class="text-6xl mb-4 animate-bounce">🎂</div>
 
@@ -20,7 +66,7 @@
 
     <p class="text-gray-700 text-lg leading-relaxed mb-6">
       5月18号，是一个很特殊的一天。它代表着某个可爱的人生日。HAPPY BIRTHDAY CATHYY🎉🎂🎂
-      Semoga kamu makin bahagia setiap hariii, jangan lupa selalu senyumm karna 你笑起来的时候很可爱也很好看 :p 😁😁
+      Semoga kamu makin bahagia setiap hariii, jangan lupa selalu senyumm karna 你笑起来的时候很可爱 juga很好看 :p 😁😁
     </p>
 
     <div class="bg-pink-50 rounded-2xl p-6 mb-6 shadow-inner">
@@ -56,6 +102,52 @@
   <script>
     function showMessage() {
       document.getElementById("message").classList.remove("hidden");
+    }
+
+    // Script untuk membuat bintang dan meteor secara dinamis
+    const starfield = document.getElementById('starfield');
+
+    // Buat Bintang (60 buah)
+    const starCount = 60;
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      
+      // Ukuran acak antara 1px sampai 3px
+      const size = Math.random() * 2 + 1;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      
+      // Posisi acak di layar
+      star.style.top = `${Math.random() * 100}vh`;
+      star.style.left = `${Math.random() * 100}vw`;
+      
+      // Durasi kedip acak agar tidak barengan
+      const duration = Math.random() * 3 + 2; 
+      const delay = Math.random() * 5;
+      star.style.setProperty('--duration', `${duration}s`);
+      star.style.animationDelay = `${delay}s`;
+      
+      starfield.appendChild(star);
+    }
+
+    // Buat Meteor (6 buah bergantian)
+    const meteorCount = 6;
+    for (let i = 0; i < meteorCount; i++) {
+      const meteor = document.createElement('div');
+      meteor.classList.add('meteor');
+      
+      // Posisi awal meteor (acak di sisi kanan/atas layar)
+      meteor.style.top = `${Math.random() * 40}%`;
+      meteor.style.left = `${Math.random() * 60 + 30}%`; 
+      
+      // Jeda waktu jatuh dibuat acak agar bergantian terus menerus
+      const duration = Math.random() * 4 + 5; // Total siklus animasi 5-9 detik
+      const delay = Math.random() * 6;
+      meteor.style.setProperty('--duration', `${duration}s`);
+      meteor.style.animationDelay = `${delay}s`;
+      
+      starfield.appendChild(meteor);
     }
   </script>
 
