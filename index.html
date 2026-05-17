@@ -54,51 +54,51 @@
   </style>
 </head>
 
-<!-- overflow-hidden di body sudah dihapus agar bisa scroll -->
 <body class="min-h-screen bg-gradient-to-tr from-gray-950 via-slate-900 to-indigo-950 flex items-center justify-center p-6 relative">
 
-  <!-- Diubah jadi FIXED dan OVERFLOW-HIDDEN agar meteor tidak merusak scroll halaman -->
+  <!-- Efek Luar Angkasa -->
   <div id="space-field" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
-  <!-- Konten Utama (z-10) -->
-  <div class="bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100 relative z-10 my-auto">
+  <!-- KOTAK UTAMA: Sekarang menggunakan gradasi Pink ke Biru Muda (from-pink-100 to-blue-100) -->
+  <div class="bg-gradient-to-br from-pink-100 to-blue-100 shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-200/60 relative z-10 my-auto">
 
     <div class="text-6xl mb-4 animate-bounce">🎂</div>
 
-    <h1 class="text-5xl font-bold text-pink-500 mb-4">
+    <h1 class="text-5xl font-bold text-pink-600 mb-4 drop-shadow-sm">
       Happy Birthday!
     </h1>
 
-    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+    <p class="text-gray-800 text-lg leading-relaxed mb-6 font-medium">
       5月18号，是一个很特殊的一天。它代表着某个可爱的人生日。HAPPY BIRTHDAY CATHYY🎉🎂🎂
       Semoga kamu makin bahagia setiap hariii, jangan lupa selalu senyumm karna 你笑起来的时候很可爱也很好看 :p 😁😁
     </p>
 
-    <div class="bg-pink-50/70 rounded-2xl p-6 mb-6 shadow-inner">
-      <h2 class="text-2xl font-semibold text-purple-500 mb-3">
+    <!-- Kotak Kecil disesuaikan jadi putih transparan agar estetik di atas gradasi -->
+    <div class="bg-white/50 backdrop-blur-sm rounded-2xl p-6 mb-6 shadow-inner border border-white/40">
+      <h2 class="text-2xl font-semibold text-purple-600 mb-3">
         Untuk Kamu ❤️
       </h2>
 
-      <p class="text-gray-600">
-        Terima kasih sudah menjadi orang yang selalu mendukung dan membawa hal-hal spesial di kehidupan SMA ku hihii.
+      <p class="text-gray-700">
+        Teria kasih sudah menjadi orang yang selalu mendukung dan membawa hal-hal spesial di kehidupan SMA ku hihii.
       </p>
     </div>
 
     <button
       onclick="showMessage()"
-      class="bg-pink-500 hover:bg-pink-600 transition-all text-white px-8 py-3 rounded-full text-lg shadow-lg active:scale-95"
+      class="bg-pink-500 hover:bg-pink-600 transition-all text-white px-8 py-3 rounded-full text-lg shadow-lg active:scale-95 font-medium"
     >
       Klik Ucapan 🎁
     </button>
 
     <div
       id="message"
-      class="hidden mt-6 bg-purple-100 border border-purple-300 text-purple-700 p-4 rounded-2xl"
+      class="hidden mt-6 bg-white/80 backdrop-blur-sm border border-purple-200 text-purple-800 p-4 rounded-2xl font-medium shadow-sm animate-fade-in"
     >
       🎉 Selamat ulang tahun! Semoga panjang umur, sehat dan bahagia selalu, dan jangan lupa semua impianmu akan tercapai. 愿你美梦成真，迈向更好的未来 ❤️
     </div>
 
-    <div class="mt-8 text-sm text-gray-400">
+    <div class="mt-8 text-sm text-gray-500">
       Dibuat dengan ❤️ khusus untuk ulang tahunmu ：p
     </div>
 
