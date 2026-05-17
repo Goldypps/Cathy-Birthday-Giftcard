@@ -13,25 +13,25 @@
       position: absolute;
       background-color: white;
       border-radius: 50%;
-      opacity: 0; /* Mulai tidak terlihat */
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+      opacity: 0;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 1), 0 0 3px rgba(255, 255, 255, 0.8);
       animation: twinkle var(--duration, 3s) infinite var(--delay, 0s) ease-in-out;
     }
 
     @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1); }
+      0%, 100% { opacity: 0.1; transform: scale(0.4); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
 
     /* Style untuk Efek Meteor Jatuh */
     .meteor {
       position: absolute;
       width: 2px;
-      height: 120px;
+      height: 150px;
       background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
       opacity: 0;
       animation: meteor-fall var(--duration) infinite linear;
-      z-index: 5; /* Sedikit di depan bintang, di belakang kartu */
+      z-index: 5;
     }
 
     @keyframes meteor-fall {
@@ -42,25 +42,26 @@
       1% {
         opacity: 1;
       }
-      8% {
-        transform: translate(-300px, 450px) rotate(35deg);
+      10% {
+        transform: translate(-400px, 600px) rotate(35deg);
         opacity: 0;
       }
       100% {
-        transform: translate(-300px, 450px) rotate(35deg);
+        transform: translate(-400px, 600px) rotate(35deg);
         opacity: 0;
       }
     }
   </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 flex items-center justify-center p-6 relative overflow-hidden">
+<!-- Background diubah menjadi tema angkasa luar malam hari (Dark Cosmic Gradient) -->
+<body class="min-h-screen bg-gradient-to-tr from-gray-950 via-slate-900 to-indigo-950 flex items-center justify-center p-6 relative overflow-hidden">
 
-  <!-- Container untuk efek background luar angkasa (bintang dan meteor) -->
+  <!-- Container untuk efek luar angkasa -->
   <div id="space-field" class="absolute inset-0 pointer-events-none z-0"></div>
 
-  <!-- Konten Utama (z-10 agar di atas background) -->
-  <div class="bg-white shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100 relative z-10">
+  <!-- Konten Utama (z-10 agar tetap kontras di atas background gelap) -->
+  <div class="bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl max-w-2xl w-full p-8 text-center border border-pink-100 relative z-10">
 
     <div class="text-6xl mb-4 animate-bounce">🎂</div>
 
@@ -73,7 +74,7 @@
       Semoga kamu makin bahagia setiap hariii, jangan lupa selalu senyumm karna 你笑起来的时候很可爱 juga很好看 :p 😁😁
     </p>
 
-    <div class="bg-pink-50 rounded-2xl p-6 mb-6 shadow-inner">
+    <div class="bg-pink-50/70 rounded-2xl p-6 mb-6 shadow-inner">
       <h2 class="text-2xl font-semibold text-purple-500 mb-3">
         Untuk Kamu ❤️
       </h2>
@@ -85,7 +86,7 @@
 
     <button
       onclick="showMessage()"
-      class="bg-pink-500 hover:bg-pink-600 transition-all text-white px-8 py-3 rounded-full text-lg shadow-lg"
+      class="bg-pink-500 hover:bg-pink-600 transition-all text-white px-8 py-3 rounded-full text-lg shadow-lg active:scale-95"
     >
       Klik Ucapan 🎁
     </button>
@@ -108,46 +109,45 @@
       document.getElementById("message").classList.remove("hidden");
     }
 
-    // Script untuk membuat banyak bintang dan meteor secara dinamis di seluruh background
     const spaceField = document.getElementById('space-field');
 
-    // Buat Bintang (Ratusan buah)
-    const starCount = 300; // Meningkatkan jumlah bintang
+    // Generate 300 Bintang secara acak di seluruh layar
+    const starCount = 300; 
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
       star.classList.add('star');
       
-      // Ukuran acak antara 1px sampai 4px
-      const size = Math.random() * 3 + 1;
+      // Ukuran acak bintang (1px sampai 3.5px) agar ada efek jauh-dekat
+      const size = Math.random() * 2.5 + 1;
       star.style.width = `${size}px`;
       star.style.height = `${size}px`;
       
-      // Posisi acak di SELURUH layar (0% - 100% untuk top dan left)
+      // Posisi acak mutlak di seluruh background
       star.style.top = `${Math.random() * 100}%`;
       star.style.left = `${Math.random() * 100}%`;
       
-      // Durasi dan jeda kedip acak agar tidak barengan
-      const duration = Math.random() * 4 + 2; // Antara 2-6 detik
-      const delay = Math.random() * 5; // Jeda awal 0-5 detik
+      // Ritme kedap-kedip yang acak total
+      const duration = Math.random() * 3 + 1.5; // Kedip antara 1.5 - 4.5 detik
+      const delay = Math.random() * 5;
       star.style.setProperty('--duration', `${duration}s`);
       star.style.setProperty('--delay', `${delay}s`);
       
       spaceField.appendChild(star);
     }
 
-    // Buat Meteor (6 buah bergantian, sedikit lebih lambat)
-    const meteorCount = 6;
+    // Generate 7 Meteor jatuh secara bergantian terus-menerus
+    const meteorCount = 7;
     for (let i = 0; i < meteorCount; i++) {
       const meteor = document.createElement('div');
       meteor.classList.add('meteor');
       
-      // Posisi awal meteor (acak di sisi kanan/atas layar agar terlihat jatuh)
-      meteor.style.top = `${Math.random() * 30}%`;
-      meteor.style.left = `${Math.random() * 60 + 40}%`; // Lebih ke kanan
+      // Posisi awal acak di area atas dan kanan layar
+      meteor.style.top = `${Math.random() * -10 + Math.random() * 30}%`;
+      meteor.style.left = `${Math.random() * 50 + 50}%`; 
       
-      // Jeda waktu jatuh dibuat acak agar bergantian terus menerus
-      const duration = Math.random() * 5 + 6; // Antara 6-11 detik
-      const delay = Math.random() * 8; // Jeda 0-8 detik
+      // Kecepatan dan jeda jatuh acak
+      const duration = Math.random() * 4 + 5; // Durasi animasi
+      const delay = Math.random() * 7; // Jeda kemunculan awal
       meteor.style.setProperty('--duration', `${duration}s`);
       meteor.style.animationDelay = `${delay}s`;
       
